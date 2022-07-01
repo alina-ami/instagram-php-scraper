@@ -10,11 +10,11 @@ class Endpoints
     const MEDIA_LINK = 'https://www.instagram.com/p/{code}';
     const ACCOUNT_MEDIAS = 'https://www.instagram.com/graphql/query/?query_hash=e769aa130647d2354c40ea6a439bfc08&variables={variables}';
     const ACCOUNT_TAGGED_MEDIAS = 'https://www.instagram.com/graphql/query/?query_hash=be13233562af2d229b008d2976b998b5&variables={variables}';
-    const ACCOUNT_JSON_INFO = 'https://www.instagram.com/{username}/?__a=1';
-    const ACCOUNT_ACTIVITY = 'https://www.instagram.com/accounts/activity/?__a=1';
-    const MEDIA_JSON_INFO = 'https://www.instagram.com/p/{code}/?__a=1';
-    const MEDIA_JSON_BY_LOCATION_ID = 'https://www.instagram.com/explore/locations/{{facebookLocationId}}/?__a=1&max_id={{maxId}}';
-    const MEDIA_JSON_BY_TAG = 'https://www.instagram.com/explore/tags/{tag}/?__a=1&max_id={max_id}';
+    const ACCOUNT_JSON_INFO = 'https://www.instagram.com/{username}/?__a=1&__d=dis';
+    const ACCOUNT_ACTIVITY = 'https://www.instagram.com/accounts/activity/?__a=1&__d=dis';
+    const MEDIA_JSON_INFO = 'https://www.instagram.com/p/{code}/?__a=1&__d=dis';
+    const MEDIA_JSON_BY_LOCATION_ID = 'https://www.instagram.com/explore/locations/{{facebookLocationId}}/?__a=1&__d=dis&max_id={{maxId}}';
+    const MEDIA_JSON_BY_TAG = 'https://www.instagram.com/explore/tags/{tag}/?__a=1&__d=dis&max_id={max_id}';
     const GENERAL_SEARCH = 'https://www.instagram.com/web/search/topsearch/?query={query}&count={count}';
     const ACCOUNT_JSON_INFO_BY_ID = 'ig_user({userId}){id,username,external_url,full_name,profile_pic_url,biography,followed_by{count},follows{count},media{count},is_private,is_verified}';
     const COMMENTS_BEFORE_COMMENT_ID_BY_CODE = 'https://www.instagram.com/graphql/query/?query_hash=33ba35852cb50da46f5b5e889df7d159&variables={variables}';
@@ -32,7 +32,7 @@ class Endpoints
     const INBOX_NEWS_SEEN_URL = 'https://i.instagram.com/api/v1/news/inbox_seen/';
     const USER_TAGS = 'https://i.instagram.com/api/v1/usertags/{{accountId}}/feed/?count={{count}}';
     const USER_FEED = 'https://www.instagram.com/graphql/query/?query_id=17861995474116400&fetch_media_item_count=12&fetch_media_item_cursor=&fetch_comment_count=4&fetch_like=10';
-    const USER_FEED2 = 'https://www.instagram.com/?__a=1';
+    const USER_FEED2 = 'https://www.instagram.com/?__a=1&__d=dis';
     const USER_FEED_hash = 'https://www.instagram.com/graphql/query/?query_hash=3f01472fb28fb8aca9ad9dbc9d4578ff';
     const INSTAGRAM_QUERY_URL = 'https://www.instagram.com/query/';
     const INSTAGRAM_CDN_URL = 'https://scontent.cdninstagram.com/';
