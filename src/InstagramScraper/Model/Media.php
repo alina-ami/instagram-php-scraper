@@ -115,6 +115,11 @@ class Media extends AbstractModel
     protected $videoViews = 0;
 
     /**
+     * @var int
+     */
+    protected $videoPlays = 0;
+
+    /**
      * @var Account
      */
     protected $owner;
@@ -423,6 +428,14 @@ class Media extends AbstractModel
     /**
      * @return int
      */
+    public function getVideoPlays()
+    {
+        return $this->videoPlays;
+    }
+
+    /**
+     * @return int
+     */
     public function getOwnerId()
     {
         return $this->ownerId;
@@ -697,6 +710,9 @@ class Media extends AbstractModel
             case 'video_view_count':
                 $this->videoViews = $value;
                 break;
+            case 'play_count':
+                $this->videoPlays = $value;
+                break;
             case 'caption_is_edited':
                 $this->isCaptionEdited = $value;
                 break;
@@ -792,7 +808,7 @@ class Media extends AbstractModel
                 break;
             case 'media_type':
                 $this->media_type = $value;
-                switch ($value){
+                switch ($value) {
                     case static::MEDIA_TYPE_IMAGE:
                         $this->type = static::TYPE_IMAGE;
                         break;
@@ -801,7 +817,7 @@ class Media extends AbstractModel
                         break;
                     case static::MEDIA_TYPE_CAROUSEL:
                         $this->type = static::TYPE_CAROUSEL;
-                        break;                    
+                        break;
                 }
                 break;
             case 'image_versions2':
@@ -854,10 +870,10 @@ class Media extends AbstractModel
     private static function setCarouselMedia($mediaArray, $carouselArray, $instance)
     {
         $carouselMedia = new CarouselMedia();
-        if(isset($carouselArray['id'])) {
+        if (isset($carouselArray['id'])) {
             $carouselMedia->setId($carouselArray['id']);
         }
-        if(isset($carouselArray['type'])) {
+        if (isset($carouselArray['type'])) {
             $carouselMedia->setType($carouselArray['type']);
 
             if (isset($carouselArray['images'])) {
@@ -878,17 +894,17 @@ class Media extends AbstractModel
                     $carouselMedia->setVideoLowBandwidthUrl($carouselArray['videos']['low_bandwidth']['url']);
                 }
             }
-        } elseif(isset($carouselArray['media_type'])) {
-            switch ($carouselArray['media_type']){
+        } elseif (isset($carouselArray['media_type'])) {
+            switch ($carouselArray['media_type']) {
                 case static::MEDIA_TYPE_IMAGE:
                     $carouselMedia->setType(static::TYPE_IMAGE);
                     break;
                 case static::MEDIA_TYPE_VIDEO:
                     $carouselMedia->setType(static::TYPE_VIDEO);
-                    break;                 
+                    break;
             }
             
-            if($carouselArray['media_type'] == static::MEDIA_TYPE_VIDEO && isset($carouselArray['video_versions'])){                
+            if ($carouselArray['media_type'] == static::MEDIA_TYPE_VIDEO && isset($carouselArray['video_versions'])) {
                 if (isset($mediaArray['view_count'])) {
                     $carouselMedia->setVideoViews($carouselArray['view_count']);
                 }
@@ -908,7 +924,7 @@ class Media extends AbstractModel
                 }
             }
             
-            if(($carouselArray['media_type'] == static::MEDIA_TYPE_IMAGE || $carouselArray['media_type'] == static::MEDIA_TYPE_VIDEO) && isset($carouselArray['image_versions2'])){                 
+            if (($carouselArray['media_type'] == static::MEDIA_TYPE_IMAGE || $carouselArray['media_type'] == static::MEDIA_TYPE_VIDEO) && isset($carouselArray['image_versions2'])) {
                 foreach ($carouselArray['image_versions2']['candidates'] as $media) {
                     $mediasUrl[] = $media['url'];
                     switch ($media['width']) {
@@ -926,7 +942,7 @@ class Media extends AbstractModel
                             break;
                     }
                 }
-            }   
+            }
         }
         array_push($instance->carouselMedia, $carouselMedia);
         return $mediaArray;
